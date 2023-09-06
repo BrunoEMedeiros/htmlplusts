@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        Considerações:
+        Pra interagir o js mais moderno (ES6) puro com uma pagina HTML
+        a sintaxe é diferente do que com um CommonJS antigo (ES5) que inclusive
+        ja foi descontinuado
+
+        O ES6 funciona com modulos, que são os import e export nas classes,
+        funções e etc, pra trabalhar isso no front faça o seguinte:
+
+        ** Primeiro, SÓ FUNCIONA DENTRO DE UM SERVIDOR WEB, os navegadores modernos
+        bloqueiam por CORS acesso a modules que venham do arquivo puro
+    -->
+    <div id="root">
+        <input type="text" name="texto" id="texto">
+        <button id="btn">
+            Save
+        </button>
+    </div>
+    <!-- 
+        A magica esta aki:
+        1º - Defina o script como type="module" pra que ele reconheça que esta trabalhando com
+        ES6;
+        2º - Importe a(s) funções, classes ou oq vc quiser dos modules que voce quiser aqui pro front
+        não se usa mais src="" com ES6
+        3º - Crie os eventos com o usuario através de addEventListener, se voce tentar
+        colocar direto no evento nativo do elemento html ele não vai achar a função
+        porque esta faltando a linha do import
+        4º - Faça oque quiser
+     -->
+    <script type="module">
+        import {createUser} from './controller/UserController.js'
+        document.querySelector('#btn').addEventListener("click",()=>{
+            createUser(document.querySelector('#texto').value);
+        })
+    </script>
+</body>
+</html>

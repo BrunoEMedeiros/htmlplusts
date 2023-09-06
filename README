@@ -1,0 +1,63 @@
+Interagindo uma pagina HTML com TS moderno
+
+Primeiramente, atualmente o padrão é o estabelecido no ES6(2015) e todos os sequentes seguem o mesmo padrão apartir do ES6 foi incluido:
+    - Classes
+    - Módulos
+    - Arrow functions
+    - Template literals
+    - Destructuring
+    - Modulos
+    - Promises
+    - async/await
+    - Symbols
+    - Generators
+    - Object spread operator
+    - Rest parameters
+    - Default parameters
+    - Optional chaining
+    - Computed property names
+
+Forma antiga com CommonJS(ES5)
+<script src="script.js"></script>
+
+    Esta forma de importar um código js ultiliza por tras dos panos a importação com require()
+    que por sua vez, tras para o front todo o arquivo JS que voce define no src=""
+        Problemas:
+            - Lentidão, pois importa um arquivo inteiro;
+            - Totalmente inseguro pois expoem ao front tudo e qualquer coisa que estiver no arquivo;
+            - CommonJS não mais recomendado como padrão pela própria ECMA International;
+        Vantagens:
+            - Usado para manutenção em códigos legados ou com um sistema interno baseado em CommonJS;
+
+Maneira moderna de interagir com ES6
+<script type="module">
+    import { minhafuncao } from './script.js'
+</script>
+
+    Esta forma importa somente oque for colocado no import pois usa o padrão import export do ES6
+        Problemas:
+            - Sem o devido cuidado pode expor seu back ao front logo de cara;
+        Soluções:
+            - Velocidade, pois importa somente oque for explicitado;
+            - Segurança, pois só expoem ao front as funções passadas no import, não dando acesso
+            a informações adicionais que podem esta contidas no arquivo de origem dessa função;
+
+--------------------------//--------------------------------------------------------------------
+Configurações adicionais para se trabalhar com TS e modulos no front
+
+tsconfig.json mantenha o padrão de: 
+{
+  "compilerOptions": {
+    "target": "ES6",                                  
+    "rootDir": "./src",                                  
+    "outDir": "./build",                                 
+    "esModuleInterop": true,                             
+    "forceConsistentCasingInFileNames": true,            
+    "strict": true,                                      
+    "skipLibCheck": true                                 
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}
+
+
